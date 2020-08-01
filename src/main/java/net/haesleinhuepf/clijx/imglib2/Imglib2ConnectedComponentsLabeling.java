@@ -30,7 +30,6 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
 
     @Override
     public boolean executeCL() {
-        System.out.println("Exec star dist");
         boolean result = imglib2ConnectedComponentsLabeling(getCLIJ2(), (ClearCLBuffer) (args[0]), (ClearCLBuffer) (args[1]));
         return result;
     }
@@ -62,7 +61,7 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
 
     @Override
     public String getDescription() {
-        return "Apply imglib2 ConnectedComponents (8-connected) to an image to create a label map.\n\nNote: This operations runs on the CPU.";
+        return "Apply imglib2 ConnectedComponents (8-connected) to an image to create a label map.\n\nNote: This operation runs on the CPU.";
     }
 
     @Override
