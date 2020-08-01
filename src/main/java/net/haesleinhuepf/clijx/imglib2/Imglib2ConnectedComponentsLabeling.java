@@ -7,16 +7,20 @@ import net.haesleinhuepf.clij.macro.CLIJOpenCLProcessor;
 import net.haesleinhuepf.clij.macro.documentation.OffersDocumentation;
 import net.haesleinhuepf.clij2.AbstractCLIJ2Plugin;
 import net.haesleinhuepf.clij2.CLIJ2;
+import net.haesleinhuepf.clij2.utilities.HasAuthor;
+import net.haesleinhuepf.clij2.utilities.HasLicense;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.algorithm.labeling.ConnectedComponents;
+import net.imglib2.img.display.imagej.ImageJFunctions;
+import net.imglib2.view.Views;
 import org.scijava.plugin.Plugin;
 
 /**
  * Demo plugin for integrating imglib2 based algorithms into CLIJ workflows.
  */
 @Plugin(type = CLIJMacroPlugin.class, name = "CLIJx_imglib2ConnectedComponentsLabeling")
-public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized
+public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin implements CLIJMacroPlugin, CLIJOpenCLProcessor, OffersDocumentation, IsCategorized, HasLicense, HasAuthor
 {
 
     public Imglib2ConnectedComponentsLabeling() {
@@ -45,7 +49,7 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
         RandomAccessibleInterval out_rai = clij2.pullRAI(out);
         in.close();
         out.close();
-
+        
         // actually apply the algorithm from imglib2
         ConnectedComponents.labelAllConnectedComponents(in_rai, out_rai, ConnectedComponents.StructuringElement.EIGHT_CONNECTED);
 
@@ -53,8 +57,6 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
         ClearCLBuffer result = clij2.push(out_rai);
         clij2.copy(result, output);
         result.close();
-
-        System.out.println("Done.");
 
         return true;
     }
@@ -72,5 +74,15 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
     @Override
     public String getCategories() {
         return "Labeling";
+    }
+
+    @Override
+    public String getAuthorName() {
+        return "Put your name here.";
+    }
+
+    @Override
+    public String getLicense() {
+        return "Public domain";
     }
 }
