@@ -10,6 +10,7 @@ import net.haesleinhuepf.clij2.CLIJ2;
 import net.haesleinhuepf.clij2.utilities.HasAuthor;
 import net.haesleinhuepf.clij2.utilities.HasLicense;
 import net.haesleinhuepf.clij2.utilities.IsCategorized;
+import net.haesleinhuepf.imglib2.SimpleImglib2;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.algorithm.labeling.ConnectedComponents;
 import net.imglib2.img.display.imagej.ImageJFunctions;
@@ -42,16 +43,13 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
         // imglibs CC needs input and output of IntegerType, so we convert on the GPU
         ClearCLBuffer in = clij2.create(input1.getDimensions(), NativeTypeEnum.UnsignedByte);
         clij2.copy(input1, in);
-        ClearCLBuffer out = clij2.create(input1.getDimensions(), NativeTypeEnum.UnsignedShort);
 
         // get images out of the GPU
         RandomAccessibleInterval in_rai = clij2.pullRAI(in);
-        RandomAccessibleInterval out_rai = clij2.pullRAI(out);
         in.close();
-        out.close();
-        
+
         // actually apply the algorithm from imglib2
-        ConnectedComponents.labelAllConnectedComponents(in_rai, out_rai, ConnectedComponents.StructuringElement.EIGHT_CONNECTED);
+        RandomAccessibleInterval out_rai = SimpleImglib2.connectedComponentsLabelingBox(in_rai);
 
         // push result back to the GPU
         ClearCLBuffer result = clij2.push(out_rai);
