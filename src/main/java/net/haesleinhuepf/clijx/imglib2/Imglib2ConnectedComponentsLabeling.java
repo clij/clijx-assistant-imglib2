@@ -86,4 +86,10 @@ public class Imglib2ConnectedComponentsLabeling extends AbstractCLIJ2Plugin impl
     public String getOutputType() {
         return "Label Image";
     }
+    
+    
+    @Override
+    public ClearCLBuffer createOutputBufferFromSource(ClearCLBuffer input) {
+        return clij.create(input.getDimensions(), NativeTypeEnum.Float);
+    }
 }
