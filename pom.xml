@@ -57,14 +57,14 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:git://github.com/haesleinhuepf/incubator</connection>
-        <developerConnection>scm:git:git@github.com/haesleinhuepf/incubator</developerConnection>
+		<connection>scm:git:git://github.com/clij/assistant</connection>
+        <developerConnection>scm:git:git@github.com/clij/assistant</developerConnection>
         <tag>HEAD</tag>
 		<url>https://github.com/haesleinhuepf/</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/haesleinhuepf/incubator/issues</url>
+		<url>https://github.com/clij/assistant/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>None</system>
